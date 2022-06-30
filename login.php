@@ -22,7 +22,7 @@ if($_POST){
 
         $passwordDB = $query['password'];
 
-        if(strcmp(md5($password),$passwordDB) !== 0){
+        if(strcmp(md5($password),$passwordDB) == 0){
             $response['status'] =true;
             $response['message'] ='login berhasil';
             $response['data'] =[
