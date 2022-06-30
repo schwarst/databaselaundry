@@ -2,19 +2,21 @@
 
 include 'connection.php';
 
+
 if($_POST){
 
     //data
     $username = $_POST['username']??'';
     $password = $_POST['password']??'';
 
-    $response = []; //respon data
+    $response = array(); //respon data
 
     //cek username dalam db
-    $userQuery = $connection->prepare("SELECT * FROM user where username = ?");
+    $userQuery = $connection->prepare("SELECT * FROM user where username =?");
     $userQuery->execute(array($username));
+    
     $query = $userQuery->fetch();
-
+    
     if($userQuery->rowCount()==0){
         $response['status'] = false;
         $response['message'] = "username tidak terdaftar";
@@ -22,7 +24,7 @@ if($_POST){
 
         $passwordDB = $query['password'];
 
-        if(strcmp(md5($password),$passwordDB) == 0){
+        if(strcmp(md5($password),$passwordDB)=== 0){
             $response['status'] =true;
             $response['message'] ='login berhasil';
             $response['data'] =[
